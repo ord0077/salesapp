@@ -33,6 +33,8 @@ Route::post('send_to_cbc/{id}','FormController@send_to_cbc');
 Route::post('preview','FormController@preview');
 Route::resource('forms','FormController');
 
+Route::get('user-form/{id}','FormController@user_form');
+
 Route::get('forms_by_user','FormController@forms_by_user');
 Route::get('/generate_leads','LeadsController@generate_leads');
 

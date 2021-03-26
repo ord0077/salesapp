@@ -4,7 +4,7 @@
 <p><a href="http://hblasset.com/" target="_blank">www.hblasset.com</a></p>
 
 <p><a class="" href="{{url('/')}}">DashBoard</a></p>
-<p><a class="" href="{{url('welcome')}}">Home</a></p>
+{{-- <p><a class="" href="{{url('welcome')}}">Home</a></p> --}}
 
 
 

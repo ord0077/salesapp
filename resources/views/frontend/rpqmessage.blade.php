@@ -12,7 +12,7 @@
 
 <div class="col-lg-12 product">
 
-RPQ form has been submitted
+    Thank You. Your Risk Profile Questionnaire has been filled successfully.
 
 {{-- 
 <p class="product-heading-bg"><a style="color:#fff;" href="fi_mmf">Fixed Income /  <br/> Money Market Funds</a></p>
@@ -33,6 +33,6 @@ RPQ form has been submitted
 
 
 </div>
-<a class="home-icon" href="{{url('/')}}/products"><img src="images/home-icon.png"></a>
+<a class="home-icon" href="{{url('/')}}"><img src="images/home-icon.png"></a>
 </div>
 @include('frontend.footer')

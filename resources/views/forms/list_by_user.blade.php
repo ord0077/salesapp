@@ -32,26 +32,26 @@
 </tr>
 </thead>
 <tbody>
-@foreach($data as $data)
+@foreach($data as $d)
 <tr>
-<th scope="row">{{$data->form_id}}</th>
-<td>{{$data->created_at}}</td>
+<th scope="row">{{$d->form_id}}</th>
+<td>{{$d->created_at}}</td>
 <td>
 
-  @if($data->status == 0)
+  @if($d->status == 0)
 <span class="label label-warning">Pending</span>
-@elseif($data->status == 1)
+@elseif($d->status == 1)
 <span class="label label-info">Sent for changes</span>
-@elseif($data->status == 2)
+@elseif($d->status == 2)
 <span class="label label-success">Changes Done</span>
-@elseif($data->status == 3)
+@elseif($d->status == 3)
 <span class="label label-success">Sent to cbc</span>
-@elseif($data->status == 4)
+@elseif($d->status == 4)
 <span class="label label-success">Cbc Done</span>
 @endif
 </td>
 <td>
-<a href="{{url('user-form/'.$data->form_id)}}">View Details</a>
+<a href="{{url('user-form/'.$d->form_id)}}">View Details</a>
 
 
 </td>
@@ -60,6 +60,7 @@
 
 </tbody>
 </table>
+{{$data->links()}}
 </div>
 
 </div>

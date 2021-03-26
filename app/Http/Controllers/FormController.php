@@ -8,6 +8,7 @@ use DB;
 use App\Form;
 use App\Risk;
 use Yajra\Datatables\Datatables;
+use Exception;
 
 use Mail;
 use App\Mail\Forms;
@@ -25,43 +26,37 @@ $this->middleware('auth');
 public function index()
 {
 $data = Form::all();
-return view('forms.list',compact('data'));
+  return view('forms.list',compact('data'));
 }
 
 
 public function assign(Request $request,$id)
 {
 
-  $user_email = DB::table('users')->where('id',$request->user_id)->first()->email;
+  $user = $this->ddf('users','id',$request->user_id);
 
-  $updated = DB::table('forms')
-  ->where('form_id',$id)
-  ->update([
-  'assigned_to' => $request->user_id
-  ]);
+  $updated = DB::table('forms')->where('form_id',$id)->update(['assigned_to' => $request->user_id]);
   
   if($updated){
-  
-    $send = Mail::to($user_email)->send(new Assign_Form());
-    		if (empty($send)) {
-	          \DB::table('email_activities')->insert([
-	          'status' => 'success',
-	          'msg' => 'mail has been sent successfully',
-	          'action' => 'from assigning',
-	          'created_at' => now()
-	          ]);
-	          }
-	          else {          
 
-	          \DB::table('email_activities')->insert([
-	          'status' => 'fail',
-	          'msg' => 'mail not sent',
-	           'action' => 'from assigning',
-	          'created_at' => now()
-	          ]);	           
-	          }
+    try {
+         
+    $send = Mail::to($user->email)->send(new Assign_Form());
 
-  return back()->with('msg','Form has been assigned');
+    $arr = [
+      'action' => 'from assigning',
+      'created_at' => now()
+    ];
+
+    list($arr['status'],$arr['msg']) = empty($send) ? ['success','mail has been sent successfully'] : ['fail','mail not sent'];
+    \DB::table('email_activities')->insert($arr);
+    return back()->with('msg','Form has been assigned');
+  } catch (Exception $e) {
+    
+    return back()->with('err','Email not sent');
+  }
+
+
   }
   else{
 
@@ -480,9 +475,9 @@ $arr = array (
   'ZakatOptions' => $customer_details->zakat_options,
   'ZakatAttachmentExtension' => 'image/'.$zakat_ext,
   'MultipleNationalities' => $fatca_details->multiple_nat == 'yes' ? true : false,
-  'Nationality1' => isset($nats) ? $nats[0]  : '',
-  'Nationality2' => isset($nats) ? $nats[1]  : '',
-  'Nationality3' => isset($nats) ? $nats[2]  : '',
+  'Nationality1' => isset($nats[0]) ? $nats[0]  : '',
+  'Nationality2' => isset($nats[1]) ? $nats[1]  : '',
+  'Nationality3' => isset($nats[2]) ? $nats[2]  : '',
   'GreenCard' => $fatca_details->green_card == 'yes' ? true : false,
   'TaxResi' => $fatca_details->tax_resi == 'yes' ? true : false,
   'ForCiti' => $fatca_details->for_citi == 'yes' ? true : false,
@@ -604,46 +599,43 @@ return back()->with('msg', json_decode($response));
 public function forms_by_user()
 {
   $user_id = Auth::id();
-  $data = Form::where('user_id',$user_id)->get();
+  $data = Form::where('user_id',$user_id)->orderBy('id','dsc')->paginate(10);
   return view('forms.list_by_user',compact('data'));
 }
+
 public function user_form($id)
 {
-  $customer_id = Form::where('form_id',$id)->first()->customer_id;
-$form_data = \DB::table('forms')->where('form_id',$id)->first();
 
-$user_name = 'self';
-if($form_data->user_id != 0){
+$fd =  $this->ddf('forms','form_id',$id);
 
-$user_name = \DB::table('users')->where('id',$form_data->user_id)->first()->name;
-$agent_code = \DB::table('users')->where('id',$form_data->user_id)->first()->agent_code;          
+$user =  $fd->user_id ? $this->ddf('users','id',$fd->user_id) : (object)(['name' => 'self','agent_code' => '00']);
+
+$arr = [
+  'form_id' => $id,
+  "user_name" => $user->name,
+  "agent_code" => $user->agent_code,
+  'form_data' => $fd,
+  'customer_details' => $this->ddf('customers','id',$fd->customer_id),
+  'bank_details' => $this->ddf('bank_details','customer_id',$fd->customer_id),
+  'investment_details' => $this->ddf('investment_details','customer_id',$fd->customer_id),
+  'other_details' => $this->ddf('other_details','customer_id',$fd->customer_id), 
+  'fatca_details' => $this->ddf('fatca_details','customer_id',$fd->customer_id),   
+  'msgs' => $this->dda('discussions','form_id',$id)
+];
+
+
+return view('fields.single',$arr);
 }
 
-$customer_details = \DB::table('customers')->where('id',$customer_id)->first();
 
-$investment_details = 
-\DB::table('investment_details')->where('customer_id',$customer_id)->first();
+public function ddf($table,$col,$id)
+{
+  return \DB::table($table)->where($col,$id)->first();
+}
 
-$bank_details = \DB::table('bank_details')->where('customer_id',$customer_id)->first();
-
-$other_details = \DB::table('other_details')->where('customer_id',$customer_id)->first();
-
-$fatca_details =  \DB::table('fatca_details')->where('customer_id',$customer_id)->first();
-
-$msgs = \DB::table('discussions')->where('form_id',$id)->get();
-
-return view('fields.single',[
-    'form_id' => $id,
-    "user_name" => $user_name,
-    "agent_code" => $agent_code,
-    'form_data' => $form_data,
-    'customer_details' => $customer_details,
-    'bank_details' => $bank_details,
-    'investment_details' => $investment_details,
-    'other_details' => $other_details,          
-    'fatca_details' => $fatca_details,
-    'msgs' => $msgs,
-]);
+public function dda($table,$col,$id)
+{ 
+  return \DB::table($table)->where($col,$id)->get();
 }
 
 }

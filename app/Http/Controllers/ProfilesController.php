@@ -34,7 +34,7 @@ public function profile_single($id){
 public function my_risk_profiles($id){
 
     return view('user.my_risk_profile',[
-        'my_risk_profiles' => Risk::where('user_id', '=', $id)->get()
+        'my_risk_profiles' => Risk::where('user_id', '=', $id)->orderBy('id','dsc')->paginate(10)
     ]);
 }
 
@@ -74,8 +74,6 @@ public function save_risk_profile(Request $r){
     "user_id" => $r->user_id,
     "decision" => $r->decision,
     "userScore" => array_sum([$r->q1,$r->q2,$r->q3,$r->q4,$r->q5,$r->q6,$r->q7,$r->q8]),
-    "created_at" => now(),
-    "updated_at" => now()
     ];
 
     

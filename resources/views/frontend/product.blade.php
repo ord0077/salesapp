@@ -32,6 +32,6 @@
 
 
 </div>
-<a class="home-icon" href="{{url('/')}}/products"><img src="images/home-icon.png"></a>
+<a class="home-icon" href="{{url('/')}}"><img src="images/home-icon.png"></a>
 </div>
 @include('frontend.footer')

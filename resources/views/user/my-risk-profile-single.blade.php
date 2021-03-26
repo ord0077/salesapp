@@ -1,3 +1,5 @@
+<?php //die; dd($data->created_at);?>
+
 @extends('layouts.admin-app')
 
 @section('content')
@@ -61,6 +63,11 @@
 <tr>
 <th>Seller</th>
 <td>{{$user->name}}</td>
+</tr>
+
+<tr>
+    <th>Submitted At</th>
+    <td> {{$data->created_at}}</td>
 </tr>
 
 </tbody>

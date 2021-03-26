@@ -51,6 +51,7 @@ if($count > 0){
 
 </tbody>
 </table>
+{{$my_risk_profiles->links()}}
 </div>
 
 </div>

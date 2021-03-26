@@ -49,7 +49,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <!-- Corporate Presentation Start-->
 <!-- Paste Here -->
 
-{{-- @include('presentation') --}}
+@include('presentation')
 
 
 <!--<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>-->
@@ -73,22 +73,27 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <hr>
 <form method="POST" action="save_risk_profile">
 {{csrf_field()}}
+
 <label>Name</label>
-<input id="cn" name="client_name" type="text">
+
+<input id="cn" name="client_name" placeholder="Name"  type="text" required>
 <p id="n_field" class="field-error" style="display:none;">Name field is required.</p>
 <label>Email Address</label>
-<input id="ce" name="client_email" type="email">
+<input id="ce" name="client_email" placeholder="Email"  type="email" required>
 <p id="e_field" class="field-error" style="display:none;">Email field is required.</p>
+
+
 <label>Cell Number</label>
-<input id="cnu" name="client_number" type="number">
+<input id="cnu" name="client_number" placeholder="923001234567"  type = "text" maxlength="12" minlength="12" required>
 <p id="cn_field" class="field-error" style="display:none;">Number field is required.</p>
+
+
 <label>CNIC</label>
-<input id="cni" name="client_cnic" type="text">
+<input id="cni" name="client_cnic" type="text"   data-inputmask="'mask': '99999-9999999-9'" placeholder="99999-9999999-9" required>
+<p id="cnic_field" class="field-error" style="display:none;">CNIC field is required.</p>
 
 
-
-
-<br/><input ontouchstart="myFunction()"  click="myFunction()"  class="button1 nextBtn enabled myvalidate" type="button" value="Next">
+<br/><input ontouchstart="myFunction()"  click="myFunction()"  class="button1 nextBtn enabled myvalidate" type="submit" value="Next">
 </div>
 </section>
 
@@ -315,7 +320,7 @@ Schemes/Prize Bond<input type="radio" name="q8" id="age8" value="0"><div class="
 </section>
 
 
-<section id="fragments" data-transition="slide">
+<section id="fragments" data-transition="slide"  >
 <h3 class="main-heading" data-animate="fadeInRight">Risk Profiler</h3>
 <div class="col-lg-8 risk-profiler" style="margin:0 auto;">
 
@@ -389,7 +394,7 @@ I Disagree and Choose Another Product at My Own Risk
 <p><a href="http://hblasset.com/" target="_blank">www.hblasset.com</a></p>
 
 <p><a class="" href="{{url('/')}}">DashBoard</a></p>
-<p><a class="" href="{{url('welcome')}}">Home</a></p>
+{{-- <p><a class="" href="{{url('welcome')}}">Home</a></p> --}}
 
 
 
@@ -418,8 +423,13 @@ onclick="event.preventDefault();
 <!-- Bootstrap core JavaScript -->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 
 <script>
+
+$(":input").inputmask();
+
+
 $('#risk_funds').hide();
 //$('input[type="text"],input[type="radio"]').prop('required',true);
 $('#submitButton').on('touchstart click', function(){
@@ -916,6 +926,8 @@ xhr.open("GET", "https://maps.google.com/maps/api/geocode/json?latlng="+lat+","+
 xhr.send();
 
 }
+
+
 /// code for geo location end
 
 
@@ -934,53 +946,16 @@ Reveal.addEventListener( 'vali', function() {
     $('aside.controls').hide();
 
 }, false );
+
 function myFunction() {
-
-    var cn = $("#cn").val();
-    var ce = $("#ce").val();
-    var cnu = $("#cnu").val();
-    if(cn == '' &&  ce == '' &&  cnu == ''){
-      $('#n_field,#e_field,#cn_field').show();
-    }
-
-    else if(cn == '' &&  ce == ''){
-        $('#n_field,#e_field').show();
-
-        $('#cn_field').hide();
-
-
-    }
-    else if(cn == '' &&  cnu == ''){
-        $('#n_field,#cn_field').show();
-        $('#e_field').hide();
-    }
-
-    else if(ce == '' &&  cnu == ''){
-        $('#e_field,#cn_field').show();
-        $('#n_field').hide();
-    }
-
-    else if(cn == ''){
-        $('#n_field').show();
-        $('#e_field,#cn_field').hide();
-    }
-
-    else if(ce == ''){
-        $('#e_field').show();
-        $('#n_field,#cn_field').hide();
-    }
-
-    else if(cnu == ''){
-        $('#cn_field').show();
-        $('#n_field,#e_field').hide();
-    }
    
-    else{
-        $('#n_field,#e_field,#cn_field').hide();
+    if($("#cn").val() != '' &&  $("#ce").val() != '' &&  $("#cnu").val() != '' &&  $("#cni").val() != ''){
+        
+        Reveal.next();
         $('aside.controls').show();
-       Reveal.next();
 
     }
+    
 }
 
 </script>
