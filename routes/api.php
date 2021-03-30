@@ -21,6 +21,10 @@ Route::post('/save_investment_details','Api\ApiController@save_investment_detail
 
 Route::post('/save_other_details','Api\ApiController@save_other_details');
 
+Route::post('/save_nominees','Api\ApiController@save_nominees');
+
+Route::post('/save_crs','Api\ApiController@save_crs');
+
 
 
 Route::post('/save_fatca_details','Api\ApiController@save_fatca_details');

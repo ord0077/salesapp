@@ -122,6 +122,11 @@ class ApiController extends Controller
 			"average_annual_income_id" => $req->average_annual_income_id,
 			"created_at" => now(),
 			"updated_at" => now(),
+			"underage" => $req->underage,
+			"guardian" => $req->guardian,
+			"relation_with_minor" => $req->relation_with_minor,
+			"cnic_nicop" => $req->cnic_nicop,
+			"cnic_nicop_expiry" => $req->cnic_nicop_expiry,
 	];
 	//dd($arr);
 
@@ -188,11 +193,68 @@ class ApiController extends Controller
 		"bank_name_id" => $req->bank_name_inv_id,
 		"created_at" => now(),
 		"updated_at" => now(),
+		"beneficiary_investment" => $req->beneficiary_investment,
+		"ultimate_beneficiary_name" => $req->ultimate_beneficiary_name,
+		"relation_ultimate_beneficiary_with_investor" => $req->relation_ultimate_beneficiary_with_investor,
+		"cnic_nicp_passport_no" => $req->cnic_nicp_passport_no,
+
 	];
 		$inserted = DB::table('investment_details')->insert($arr);
 		return response()->json(200);
 	}
 
+	public function save_nominees(Request $req){
+		
+		$arr = [
+		"customer_id" => $req->customer_id,
+		"name" => $req->name,
+		"relationship" => $req->relationship, 
+		"share_percentage" => $req->share_percentage, 
+		"cnic_nicop" => $req->cnic_nicop,
+		"cnic_nicop_expiry" => $req->cnic_nicop_expiry,
+		"created_at" => now(),
+		"updated_at" => now(),
+	];
+		$inserted = DB::table('nominees')->insert($arr);
+		return response()->json(200);
+		
+	}
+	public function save_crs(Request $req){
+		
+		$arr = [
+		"customer_id" => $req->customer_id,
+		"name_account_holder" => $req->name_account_holder,
+		"family_surname" => $req->family_surname, 
+		"given_name" => $req->given_name, 
+		"middle_name" => $req->middle_name,
+		"current_address" => $req->current_address,
+		"crs_city" => $req->crs_city,
+		"county_state" => $req->county_state,
+		"crs_country" => $req->crs_country,
+		"postal_code" => $req->postal_code,
+		"po_box" => $req->po_box, 
+		"mailing_adress" => $req->mailing_adress, 
+		"town_city" => $req->town_city,
+		"mailing_county_state" => $req->mailing_county_state,
+		"country" => $req->country,
+		"mailing_postal_code" => $req->mailing_postal_code,
+		"mailing_po_box" => $req->mailing_po_box,
+		"mailing_dob" => $req->mailing_dob,
+		"mailing_pob" => $req->mailing_pob, 
+		"mailing_tob" => $req->mailing_tob, 
+		"mailing_cob" => $req->mailing_cob,
+		"tax_country_residence" => $req->cnic_nicop_expiry,
+		"taxpayer" => $req->taxpayer,
+		"taxpayer_number" => $req->taxpayer_number,
+		"reason" => $req->reason,
+		"specify_second_reason" => $req->specify_second_reason,
+		"created_at" => now(),
+		"updated_at" => now(),
+	];
+		$inserted = DB::table('c_r_s')->insert($arr);
+		return response()->json(200);
+		
+	}
 
 		public function save_other_details(Request $req){
 	
