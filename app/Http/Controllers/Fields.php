@@ -32,7 +32,7 @@ class Fields extends Controller
     {
 
 
-       if(!$request->cd && !$request->bd && !$request->ids && !$request->od && !$request->fd){
+       if(!$request->cd && !$request->bd && !$request->ids && !$request->od && !$request->fd && !$request->ndFirst && !$request->ndSecond){
          return back()->with('err','Atleast 1 field is required to send request.');
        }
 
@@ -45,10 +45,11 @@ class Fields extends Controller
         'updated_at' => now(),
       ]);
 
-
+        $nominees = array($request->ndFirst,$request->ndSecond);
         $data = [
         'form_id' => $id,
         'customer_details' => json_encode($request->cd),
+        'nominee_details' => json_encode($nominees),
         'bank_details' => json_encode($request->bd),
         'investment_details' => json_encode($request->ids),
         'other_details' => json_encode($request->od),
@@ -58,6 +59,9 @@ class Fields extends Controller
         "created_at" => now(),
         "updated_at" => now(),
         ];
+        // echo "<pre>";
+        // print_r($data);
+        // die;
 
         // if(DB::table('fields')->where('form_id',$id)->exists()){
         //     $success = DB::table('fields')->where('form_id',$id)->update($data);
@@ -129,18 +133,43 @@ class Fields extends Controller
     {
         $customer_id = Form::where('form_id',$id)->first()->customer_id;
         $cds = json_decode(Field::where('form_id',$id)->first()->customer_details);
+        $nds = json_decode(Field::where('form_id',$id)->first()->nominee_details);
         $bds = json_decode(Field::where('form_id',$id)->first()->bank_details);
         $ids = json_decode(Field::where('form_id',$id)->first()->investment_details);
         $ods = json_decode(Field::where('form_id',$id)->first()->other_details);
         $fds = json_decode(Field::where('form_id',$id)->first()->fatca_details);
         $data = [];
      
+        
       if(!is_null($cds)){ 
         foreach($cds as $d){
         $custom_old_data = \DB::table('customers')->where('id',$customer_id)->first()->$d;        
         $cds_new[] = [$d,$custom_old_data];
+        
         }
       }
+
+      if(!is_null($nds)){ 
+        $nds_new = array();
+        $var = "first";
+        foreach($nds as $nd){
+          $nid = null;
+          foreach($nd as $key=>$n){
+            if($key == 0){
+              $nid = $n;
+              $custom_old_data = \DB::table('nominees')->where('id',$nid)->first()->id;
+              $nds_new[$var][] = ['id',$custom_old_data];
+            }
+            else{
+              $custom_old_data = \DB::table('nominees')->where('id',$nid)->first()->$n;
+              $nds_new[$var][] = [$n,$custom_old_data];
+            }
+          }
+          echo "<br>";
+          $var = "second";
+        }
+      }
+    
       if(!is_null($bds)){ 
         foreach($bds as $d){
         $custom_old_data = \DB::table('bank_details')->where('customer_id',$customer_id)->first()->$d;        
@@ -172,6 +201,7 @@ class Fields extends Controller
       return view('fields.edit',[
         'form_id' => $id,
         'cds_new' => $cds_new ?? null,
+        'nds_new' => $nds_new ?? null,
         'bds_new' => $bds_new ?? null,
         'ids_new' => $ids_new ?? null,
         'ods_new' => $ods_new ?? null,
@@ -189,6 +219,7 @@ class Fields extends Controller
 
 public function update(Request $request, $id)
 {  
+  
   $customer_id = \DB::table('forms')->where('form_id',$id)->first()->customer_id;
 
   if($request->hasFile('zakat_certificate')){
@@ -228,7 +259,29 @@ public function update(Request $request, $id)
      $cd_success = DB::table('customers')->where('id',$customer_id)->update([$key => $value]);
     }
   }
-
+  
+  if($request['ndfirst']){
+    $nid = null;
+    foreach ($request['ndfirst'] as $key => $value) {
+      if($key == 'id'){
+        $nid = $value;
+      }
+      else{
+        $nd_success = DB::table('nominees')->where('id',$nid)->update([$key => $value]);
+      }
+     }
+  }
+  if($request['ndsecond']){
+    $nid = null;
+    foreach ($request['ndsecond'] as $key => $value) {
+      if($key == 'id'){
+        $nid = $value;
+      }
+      else{
+        $nd_success = DB::table('nominees')->where('id',$nid)->update([$key => $value]);
+      }
+     }
+  }
   if($request['bd']){    
     foreach ($request['bd'] as $key => $value) {
      $bd_success = DB::table('bank_details')->where('customer_id',$customer_id)->update([$key => $value]);
@@ -264,7 +317,8 @@ if(isset($zc_success)
 || isset($cnic_attachment_success)
 || isset($soi_attachment_success)
 || isset($wf_success)
-|| isset($cd_success) 
+|| isset($cd_success)
+|| isset($nd_success) 
 || isset($bd_success)
 || isset($ids_success)
 || isset($od_success)

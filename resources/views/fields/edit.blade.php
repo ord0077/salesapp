@@ -38,7 +38,6 @@ background: #abd;
 </h4>
 </div>
 
-
 <div class="tables">
 <div class="panel-body widget-shadow">
 
@@ -195,6 +194,66 @@ $ext = pathinfo($cdn[1], PATHINFO_EXTENSION);
 </table>
 
 
+@if($nds_new)
+<table class="table">
+<tbody>
+
+<br>
+<h4 class="alert alert-success">Nominees Details</h4>
+
+@foreach($nds_new as $ind => $nds)
+<tr>
+<th colspan="2" class="text-center"><?php echo $ind." Nominee"; ?></th>
+</tr>
+@foreach($nds as $key => $nd)
+@if($key == 0)
+<input type="hidden" name="nd{{$ind}}[{{$nd[0]}}]" value="{{ $nd[1] }}">
+@endif
+
+@if($nd[0] == 'name')
+<tr>
+<th>{{$nd[0]}}</th>
+<td><input class="form-control" type="text" name="nd{{$ind}}[{{$nd[0]}}]" value="{{$nd[1]}}"></td>
+</tr>
+
+@elseif($nd[0] == 'relationship')
+<tr>
+<th>{{$nd[0]}}</th>
+<td><input class="form-control" type="text" name="nd{{$ind}}[{{$nd[0]}}]" value="{{$nd[1]}}"></td>
+</tr>
+
+@elseif($nd[0] == 'share_percentage')
+<tr>
+<th>{{$nd[0]}}</th>
+<td><input class="form-control" type="text" name="nd{{$ind}}[{{$nd[0]}}]" value="{{$nd[1]}}"></td>
+</tr>
+@elseif($nd[0] == 'cnic_nicop')
+<tr>
+<th>{{$nd[0]}}</th>
+<td><input class="form-control" type="text" name="nd{{$ind}}[{{$nd[0]}}]" value="{{$nd[1]}}"></td>
+</tr>
+@elseif($nd[0] == 'cnic_nicop_expiry')
+<tr>
+<th>{{$nd[0]}}</th>
+<td><input class="form-control" type="text" name="nd{{$ind}}[{{$nd[0]}}]" value="{{$nd[1]}}"></td>
+</tr>
+@endif
+@endforeach
+@endforeach
+
+</tbody>
+</table>
+@endif
+
+
+
+
+
+
+
+
+
+
 
 @if($bds_new)
 <table class="table">
@@ -289,6 +348,21 @@ $ext = pathinfo($cdn[1], PATHINFO_EXTENSION);
 </tr>
 
 @elseif($cdn[0] == 'amount' || $cdn[0] == 'instrument_number')
+<tr>
+<th>{{$cdn[0]}}</th>
+<td><input class="form-control" type="text" name="ids[{{$cdn[0]}}]" value="{{$cdn[1]}}"></td>
+</tr>
+@elseif($cdn[0] == 'ultimate_beneficiary_name')
+<tr>
+<th>{{$cdn[0]}}</th>
+<td><input class="form-control" type="text" name="ids[{{$cdn[0]}}]" value="{{$cdn[1]}}"></td>
+</tr>
+@elseif($cdn[0] == 'relation_ultimate_beneficiary_with_investor')
+<tr>
+<th>{{$cdn[0]}}</th>
+<td><input class="form-control" type="text" name="ids[{{$cdn[0]}}]" value="{{$cdn[1]}}"></td>
+</tr>
+@elseif($cdn[0] == 'cnic_nicp_passport_no')
 <tr>
 <th>{{$cdn[0]}}</th>
 <td><input class="form-control" type="text" name="ids[{{$cdn[0]}}]" value="{{$cdn[1]}}"></td>
