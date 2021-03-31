@@ -15,6 +15,7 @@ class AddNomineeToFieldsTable extends Migration
     {
         Schema::table('fields', function (Blueprint $table) {
             $table->longtext('crs_details')->nullable();
+            $table->longtext('nominee_details')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AddNomineeToFieldsTable extends Migration
     {
         Schema::table('fields', function (Blueprint $table) {
             $table->dropColumn('crs_details');
+            $table->dropColumn('nominee_details');
         });
     }
 }
