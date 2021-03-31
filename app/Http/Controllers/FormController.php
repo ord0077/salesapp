@@ -610,7 +610,7 @@ $arr = [
   'other_details' => $this->ddf('other_details','customer_id',$fd->customer_id), 
   'fatca_details' => $this->ddf('fatca_details','customer_id',$fd->customer_id),   
   'crs_details' => $this->ddf('c_r_s','customer_id',$fd->customer_id),
-  'nominee_details' => $this->dda('nominees','customer_id',$fd->customer_id)
+  'nominee_details' => $this->dda('nominees','customer_id',$fd->customer_id),
   'msgs' => $this->dda('discussions','form_id',$id)
 ];
 
