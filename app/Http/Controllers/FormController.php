@@ -69,45 +69,7 @@ public function assign(Request $request,$id)
 
 public function show($id)
 {
-//    dd($id);
-
-
-$customer_id = Form::where('form_id',$id)->first()->customer_id;
-$form_data = \DB::table('forms')->where('form_id',$id)->first();
-
-$user_name = 'self';
-if($form_data->user_id != 0){
-
-$user_name = \DB::table('users')->where('id',$form_data->user_id)->first()->name;
-$agent_code = \DB::table('users')->where('id',$form_data->user_id)->first()->agent_code;          
-}
-
-$customer_details = \DB::table('customers')->where('id',$customer_id)->first();
-
-$investment_details = 
-\DB::table('investment_details')->where('customer_id',$customer_id)->first();
-
-$bank_details = \DB::table('bank_details')->where('customer_id',$customer_id)->first();
-
-$other_details = \DB::table('other_details')->where('customer_id',$customer_id)->first();
-
-$fatca_details =  \DB::table('fatca_details')->where('customer_id',$customer_id)->first();
-
-$msgs = \DB::table('discussions')->where('form_id',$id)->get();
-
-return view('retails.single',[
-    'form_id' => $id,
-    "user_name" => $user_name,
-    "agent_code" => $agent_code,
-    'form_data' => $form_data,
-    'customer_details' => $customer_details,
-    'bank_details' => $bank_details,
-    'investment_details' => $investment_details,
-    'other_details' => $other_details,          
-    'fatca_details' => $fatca_details,
-    'msgs' => $msgs,
-]);
-
+  return $this->getFormDetails('retails.single',$id);
 }
 
 public function send_to_cbc(Request $r,$id)
@@ -606,6 +568,33 @@ public function forms_by_user()
 public function user_form($id)
 {
 
+return $this->getFormDetails('fields.single',$id);
+
+// $fd =  $this->ddf('forms','form_id',$id);
+
+// $user =  $fd->user_id ? $this->ddf('users','id',$fd->user_id) : (object)(['name' => 'self','agent_code' => '00']);
+
+// $arr = [
+//   'form_id' => $id,
+//   "user_name" => $user->name,
+//   "agent_code" => $user->agent_code,
+//   'form_data' => $fd,
+//   'customer_details' => $this->ddf('customers','id',$fd->customer_id),
+//   'bank_details' => $this->ddf('bank_details','customer_id',$fd->customer_id),
+//   'investment_details' => $this->ddf('investment_details','customer_id',$fd->customer_id),
+//   'other_details' => $this->ddf('other_details','customer_id',$fd->customer_id), 
+//   'fatca_details' => $this->ddf('fatca_details','customer_id',$fd->customer_id),   
+//   'msgs' => $this->dda('discussions','form_id',$id)
+// ];
+
+
+// return view('fields.single',$arr);
+}
+
+
+public function getFormDetails($view,$id)
+{
+
 $fd =  $this->ddf('forms','form_id',$id);
 
 $user =  $fd->user_id ? $this->ddf('users','id',$fd->user_id) : (object)(['name' => 'self','agent_code' => '00']);
@@ -620,13 +609,13 @@ $arr = [
   'investment_details' => $this->ddf('investment_details','customer_id',$fd->customer_id),
   'other_details' => $this->ddf('other_details','customer_id',$fd->customer_id), 
   'fatca_details' => $this->ddf('fatca_details','customer_id',$fd->customer_id),   
+  'crs_details' => $this->ddf('c_r_s','customer_id',$fd->customer_id),
   'msgs' => $this->dda('discussions','form_id',$id)
 ];
 
-
-return view('fields.single',$arr);
+return view($view,$arr);
+  
 }
-
 
 public function ddf($table,$col,$id)
 {
