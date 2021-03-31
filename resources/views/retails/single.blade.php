@@ -176,7 +176,6 @@ td.td_print_action{padding-left: 130px!important;}
 	Send To CBC
 </button>
 
-
 <form  method="post" action="{{url('send_back')}}/{{$form_id}} " enctype="multipart/form-data">
 
 <table class="table">
@@ -471,9 +470,92 @@ td.td_print_action{padding-left: 130px!important;}
 </td>
 </tr> 
 @endif
+@if($customer_details->underage)
+<tr>
+<td>
+<input type="checkbox" name="cd[]" value="guardian">
+</td>
+<th>Guardian Name</th>
+<td>{{$customer_details->guardian}}</td>
+</tr> 
+<tr>
+<td>
+<input type="checkbox" name="cd[]" value="relation_with_minor">
+</td>
+<th>Relation with Minor</th>
+<td>{{$customer_details->relation_with_minor}}</td>
+</tr> 
+<tr>
+<td>
+<input type="checkbox" name="cd[]" value="cnic_nicop">
+</td>
+<th>CNIC/NICOP</th>
+<td>{{$customer_details->cnic_nicop}}</td>
+</tr> 
+<tr>
+<td>
+<input type="checkbox" name="cd[]" value="cnic_nicop_expiry">
+</td>
+<th>CNIC/NICOP Expiry</th>
+<td>{{$customer_details->cnic_nicop_expiry}}</td>
+</tr> 
+@endif
 </tbody>
 </table>
 
+
+<table class="table">
+<tbody>
+
+@if(count($nominee_details) > 0)
+<br>
+<h4 class="alert alert-success bank_detail">Nominees Details</h4>
+<?php $var = "First" ?>
+@foreach($nominee_details as $nominee_detail)
+<input type="hidden" name="nd{{$var}}[]" value="{{ $nominee_detail->id }}">
+<tr>
+<th colspan="3"><?php echo $var." Nominee"; ?></th>
+</tr>
+<tr>
+<td>
+<input type="checkbox" name="nd{{$var}}[]" value="name">
+</td>
+<th>Name</th>
+<td class="td_print">{{$nominee_detail->name}}</td>
+</tr>
+<tr>
+<td>
+<input type="checkbox" name="nd{{$var}}[]" value="relationship">
+</td>
+<th>Relationship</th>
+<td class="td_print">{{$nominee_detail->relationship }}</td>
+</tr>
+<tr>
+<td>
+<input type="checkbox" name="nd{{$var}}[]" value="share_percentage">
+</td>
+<th>Share %</th>
+<td class="td_print">{{$nominee_detail->share_percentage}}</td>
+</tr>
+<tr>
+<td>
+<input type="checkbox" name="nd{{$var}}[]" value="cnic_nicop">
+</td>
+<th>CNIC/NICOP</th>
+<td class="td_print">{{$nominee_detail->cnic_nicop}}</td>
+</tr>
+<tr>
+<td>
+<input type="checkbox" name="nd{{$var}}[]" value="cnic_nicop_expiry">
+</td>
+<th>CNIC/NICOP Expiry</th>
+<td class="td_print">{{$nominee_detail->cnic_nicop_expiry}}</td>
+</tr>
+<?php $var = "Second"; ?>
+@endforeach
+</tbody>
+</table>
+@endif
 
 <table class="table">
 <tbody>
@@ -765,7 +847,31 @@ td.td_print_action{padding-left: 130px!important;}
 <td>{{$investment_details->instrument_number}}</td>
 </tr>
 
+@if($investment_details->beneficiary_investment)
+<tr>
+<td>
+<input type="checkbox" name="ids[]" value="ultimate_beneficiary_name">
+</td>
+<th>Ultimate Beneficiary Name</th>
+<td>{{$investment_details->ultimate_beneficiary_name}}</td>
+</tr>
 
+<tr>
+<td>
+<input type="checkbox" name="ids[]" value="relation_ultimate_beneficiary_with_investor">
+</td>
+<th>Relation Ultimate Beneficiary with Investor</th>
+<td>{{$investment_details->relation_ultimate_beneficiary_with_investor}}</td>
+</tr>
+
+<tr>
+<td>
+<input type="checkbox" name="ids[]" value="cnic_nicp_passport_no">
+</td>
+<th>CNIC/NICP/Passport No</th>
+<td>{{$investment_details->cnic_nicp_passport_no}}</td>
+</tr>
+@endif
 </tbody>
 </table>
 
