@@ -517,6 +517,195 @@ td.td_print_action{padding-left: 130px!important;}
 </tbody>
 </table>
 
+
+
+<table class="table">
+  <tbody>
+  
+  <br>
+  <h4 class="alert alert-success bank_detail">Common Reporting Standard (CRS) Details</h4>
+  
+
+    <tr>
+
+      <td><input type="checkbox" name="crs[]" value="crs_name_account_holder"></td>
+
+    <th>Name of Account Holder </th>
+    <td class="td_print">{{$crs_details->crs_name_account_holder}}</td>
+
+    </tr>
+    
+    <tr>
+      <td><input type="checkbox" name="crs[]" value="crs_family_name"></td>
+
+      <th>Family Name of Surname(s) Title </th>
+    <td class="td_print">{{$crs_details->crs_family_name}}</td>
+    </tr>
+    
+    
+    <tr>
+      <td><input type="checkbox" name="crs[]" value="crs_given_name"></td>
+
+    <th>First or Given Name (Text Box) </th>
+    <td class="td_print">{{$crs_details->crs_given_name}}</td>
+    </tr>
+    
+    <tr>
+      <td><input type="checkbox" name="crs[]" value="crs_middle_name"></td>
+
+    <th>Middle Name(s) (Text Box) </th>
+    <td class="td_print">{{$crs_details->crs_middle_name}}</td>
+    </tr>
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_current_address"></td>
+
+    <th>Current Residential Address </th>
+    <td class="td_print">{{$crs_details->crs_current_address}}</td>
+    </tr>
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_country_txt"></td>
+
+    <th>Country </th>
+    <td class="td_print">{{$crs_details->crs_country_txt}}</td>
+    </tr>
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_city_txt"></td>
+
+    <th>Town/City/Province </th>
+    <td class="td_print">{{$crs_details->crs_city_txt}}</td>
+    </tr>
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_state"></td>
+
+    <th>County/State </th>
+    <td class="td_print">{{$crs_details->crs_state}}</td>
+    </tr>
+    
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_zipcode"></td>
+
+    <th>Postal Code / Zip Code </th>
+    <td class="td_print">{{$crs_details->crs_zipcode}}</td>
+    </tr>
+    
+    <tr>
+            <td><input type="checkbox" name="crs[]" value="crs_pobox"></td>
+
+    <th>PO Box </th>
+    <td class="td_print">{{$crs_details->crs_pobox}}</td>
+    </tr>
+
+
+    <tr>
+      <th colspan="2"> <h4 style="margin-top: 15px;">Mailing Address Details</h4> </th>
+      </tr>
+      
+      <tr>
+        <td><input type="checkbox" name="crs[]" value="mailing_address"></td>
+        <th>Mailing Address </th>
+        <td class="td_print">{{$crs_details->mailing_address}}</td>
+        </tr>
+        
+        
+        <tr>
+          <td><input type="checkbox" name="crs[]" value="mailing_city"></td>
+        <th>Town/City/Province </th>
+        <td class="td_print">{{$crs_details->mailing_city}}</td>
+        </tr>
+          
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_state"></td>
+          <th>County/State </th>
+          <td class="td_print">{{$crs_details->mailing_state}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_country"></td>
+          <th>Country </th>
+          <td class="td_print">{{$crs_details->mailing_country}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_zipcode"></td>
+          <th>Postal Code / Zip Code </th>
+          <td class="td_print">{{$crs_details->mailing_zipcode}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_pobox"></td>
+          <th>PO Box </th>
+          <td class="td_print">{{$crs_details->mailing_pobox}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_dob"></td>
+          <th>Date of Birth </th>
+          <td class="td_print">{{$crs_details->mailing_dob}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_pob"></td>
+          <th>Place of Birth </th>
+          <td class="td_print">{{$crs_details->mailing_pob}}</td>
+          </tr>
+         
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_tob"></td>
+          <th>Town or City of Birth </th>
+          <td class="td_print">{{$crs_details->mailing_tob}}</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_cob"></td>
+          <th>Country of Birth </th>
+          <td class="td_print">{{$crs_details->mailing_cob}}</td>
+          </tr>
+      
+      
+          <tr>
+            <th colspan="2"> <h4 style="margin-top: 15px;">Country of tax Residence & Taxpayer Identification Number (TIN) Details</h4> </th>
+            </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="mailing_tax_country"></td>
+          <th>Name of Country Residence</th>
+          <td class="td_print">{{$crs_details->mailing_tax_country}}</td>
+          </tr>
+                  
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="isTaxPayer"></td>
+          <th>Taxpayer Identification (TIN)</th>
+          <td class="td_print">{{$crs_details->isTaxPayer}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="TaxPayerNumber"></td>
+          <th>Taxpayer Number</th>
+          <td class="td_print">{{$crs_details->TaxPayerNumber}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="reason"></td>
+          <th>Reason</th>
+          <td class="td_print">{{$crs_details->reason}}</td>
+          </tr>
+      
+          <tr>
+            <td><input type="checkbox" name="crs[]" value="specify_second_reason"></td>
+          <th>Specific Reason</th>
+          <td class="td_print">{{$crs_details->specify_second_reason}}</td>
+          </tr>
+  
+  
+  
+  </tbody>
+  </table>
+
 <table class="table">
 <tbody>
 

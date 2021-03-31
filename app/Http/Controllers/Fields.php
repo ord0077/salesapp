@@ -32,7 +32,7 @@ class Fields extends Controller
     {
 
 
-       if(!$request->cd && !$request->bd && !$request->ids && !$request->od && !$request->fd){
+       if(!$request->crs && !$request->cd && !$request->bd && !$request->ids && !$request->od && !$request->fd){
          return back()->with('err','Atleast 1 field is required to send request.');
        }
 
@@ -45,6 +45,8 @@ class Fields extends Controller
         'updated_at' => now(),
       ]);
 
+  
+
 
         $data = [
         'form_id' => $id,
@@ -53,67 +55,68 @@ class Fields extends Controller
         'investment_details' => json_encode($request->ids),
         'other_details' => json_encode($request->od),
         'fatca_details' => json_encode($request->fd),
+        'crs_details' => json_encode($request->crs),
         'user_id' => $request->user_id,
         'status' => 'unchecked',
         "created_at" => now(),
         "updated_at" => now(),
         ];
 
-        // if(DB::table('fields')->where('form_id',$id)->exists()){
-        //     $success = DB::table('fields')->where('form_id',$id)->update($data);
-        // }else{
-        //     $success = DB::table('fields')->insert($data);
-        // }
+        // dd($data);
+
 
         $success = (DB::table('fields')->where('form_id',$id)->exists()) 
-        ? DB::table('fields')->where('form_id',$id)->update($data) : DB::table('fields')->insert($data) ;
+            ? DB::table('fields')->where('form_id',$id)->update($data) 
+            : DB::table('fields')->insert($data) ;
+
+           
 
 
         if($success){
           $status_updated = DB::table('forms')->where('form_id',$id )->update(['status' => 1]);
           $result_msg = ['msg','Your form has been submitted.'];  
           
-          $sales_email = DB::table('users')->where('id',$request->user_id)->first()->email;
-          $send = Mail::to($sales_email)->send(new Correction());
-          		if (empty($send)) {
-		          \DB::table('email_activities')->insert([
-		          'status' => 'success',
-		          'msg' => 'mail has been sent successfully',
-		          'action' => 'send back to changes',
-		          'created_at' => now()
-		          ]);
-		          }
-		          else {          
+          // $sales_email = DB::table('users')->where('id',$request->user_id)->first()->email;
+          // $send = Mail::to($sales_email)->send(new Correction());
+          // 		if (empty($send)) {
+		      //     \DB::table('email_activities')->insert([
+		      //     'status' => 'success',
+		      //     'msg' => 'mail has been sent successfully',
+		      //     'action' => 'send back to changes',
+		      //     'created_at' => now()
+		      //     ]);
+		      //     }
+		      //     else {          
 	
-		          \DB::table('email_activities')->insert([
-		          'status' => 'fail',
-		          'msg' => 'mail not sent',
-		           'action' => 'send back to changes',
-		          'created_at' => now()
-		          ]);	           
-		          }
-           $recipients = \DB::table('users')->select('email')->where('role_id',3)->get();
+		      //     \DB::table('email_activities')->insert([
+		      //     'status' => 'fail',
+		      //     'msg' => 'mail not sent',
+		      //      'action' => 'send back to changes',
+		      //     'created_at' => now()
+		      //     ]);	           
+		      //     }
+          //  $recipients = \DB::table('users')->select('email')->where('role_id',3)->get();
 	 	
-	 	 foreach ($recipients as $recipient) {
-	 		$send = Mail::to($recipient)->send(new Correction());
-	 		if (empty($send)) {
-		          \DB::table('email_activities')->insert([
-		          'status' => 'success',
-		          'msg' => 'mail has been sent successfully',
-		          'action' => 'send back to changes',
-		          'created_at' => now()
-		          ]);
-		          }
-		          else {          
+	 	//  foreach ($recipients as $recipient) {
+	 	// 	$send = Mail::to($recipient)->send(new Correction());
+	 	// 	if (empty($send)) {
+		//           \DB::table('email_activities')->insert([
+		//           'status' => 'success',
+		//           'msg' => 'mail has been sent successfully',
+		//           'action' => 'send back to changes',
+		//           'created_at' => now()
+		//           ]);
+		//           }
+		//           else {          
 	
-		          \DB::table('email_activities')->insert([
-		          'status' => 'fail',
-		          'msg' => 'mail not sent',
-		           'action' => 'send back to changes',
-		          'created_at' => now()
-		          ]);	           
-		          }
-	 	}
+		//           \DB::table('email_activities')->insert([
+		//           'status' => 'fail',
+		//           'msg' => 'mail not sent',
+		//            'action' => 'send back to changes',
+		//           'created_at' => now()
+		//           ]);	           
+		//           }
+	 	// }
 	 	
         }
         else{
@@ -133,14 +136,27 @@ class Fields extends Controller
         $ids = json_decode(Field::where('form_id',$id)->first()->investment_details);
         $ods = json_decode(Field::where('form_id',$id)->first()->other_details);
         $fds = json_decode(Field::where('form_id',$id)->first()->fatca_details);
+        $crs = json_decode(Field::where('form_id',$id)->first()->crs_details);
         $data = [];
      
+    
+
+      
       if(!is_null($cds)){ 
         foreach($cds as $d){
         $custom_old_data = \DB::table('customers')->where('id',$customer_id)->first()->$d;        
         $cds_new[] = [$d,$custom_old_data];
         }
       }
+
+
+      if(!is_null($crs)){ 
+        foreach($crs as $d){
+        $custom_old_data = \DB::table('c_r_s')->where('customer_id',$customer_id)->first()->$d;        
+        $crs_new[] = [$d,$custom_old_data];
+        }
+      }  
+
       if(!is_null($bds)){ 
         foreach($bds as $d){
         $custom_old_data = \DB::table('bank_details')->where('customer_id',$customer_id)->first()->$d;        
@@ -176,6 +192,7 @@ class Fields extends Controller
         'ids_new' => $ids_new ?? null,
         'ods_new' => $ods_new ?? null,
         'fds_new' => $fds_new ?? null,
+        'crs_new' => $crs_new ?? null,
         'customer_id' => $customer_id,
         'aiw_db' => \DB::table('investment_details')
                     ->where('customer_id',$customer_id)

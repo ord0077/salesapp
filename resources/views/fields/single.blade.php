@@ -1,3 +1,7 @@
+<?php 
+// dd($crs_details);
+?>
+
 @extends('layouts.admin-app')
 
 @section('content')
@@ -324,31 +328,178 @@ td.td_print_action{padding-left: 130px!important;}
 <tbody>
 
 <br>
-<h4 class="alert alert-success bank_detail">Bank Details</h4>
+<h4 class="alert alert-success bank_detail">Common Reporting Standard (CRS) Details</h4>
 
 <tr>
-<th>Bank Name</th>
-<td class="td_print">{{$bank_details->bank_name}}</td>
+<th>Name of Account Holder </th>
+<td class="td_print">{{$crs_details->crs_name_account_holder}}</td>
 </tr>
 
 <tr>
-<th>Branch Name</th>
-<td class="td_print">{{$bank_details->branch_name}}</td>
+<th>Family Name of Surname(s) Title </th>
+<td class="td_print">{{$crs_details->crs_family_name}}</td>
+</tr>
+
+
+<tr>
+<th>First or Given Name (Text Box) </th>
+<td class="td_print">{{$crs_details->crs_given_name}}</td>
 </tr>
 
 <tr>
-<th>Account Title</th>
-<td class="td_print">{{$bank_details->account_title}}</td>
+<th>Middle Name(s) (Text Box) </th>
+<td class="td_print">{{$crs_details->crs_middle_name}}</td>
 </tr>
 
 <tr>
-<th>IBAN</th>
-<td class="td_print">{{$bank_details->iban_number}}</td>
+<th>Current Residential Address </th>
+<td class="td_print">{{$crs_details->crs_current_address}}</td>
 </tr>
 
+<tr>
+<th>Country </th>
+<td class="td_print">{{$crs_details->crs_country_txt}}</td>
+</tr>
+
+<tr>
+<th>Town/City/Province </th>
+<td class="td_print">{{$crs_details->crs_city_txt}}</td>
+</tr>
+
+<tr>
+<th>County/State </th>
+<td class="td_print">{{$crs_details->crs_state}}</td>
+</tr>
+
+
+<tr>
+<th>Postal Code / Zip Code </th>
+<td class="td_print">{{$crs_details->crs_zipcode}}</td>
+</tr>
+
+<tr>
+<th>PO Box </th>
+<td class="td_print">{{$crs_details->crs_pobox}}</td>
+</tr>
+
+<tr>
+<th colspan="2"> <h4 style="margin-top: 15px;">Mailing Address Details</h4> </th>
+</tr>
+
+<tr>
+  <th>Mailing Address </th>
+  <td class="td_print">{{$crs_details->mailing_address}}</td>
+  </tr>
+  
+  
+  <tr>
+  <th>Town/City/Province </th>
+  <td class="td_print">{{$crs_details->mailing_city}}</td>
+  </tr>
+    
+    <tr>
+    <th>County/State </th>
+    <td class="td_print">{{$crs_details->mailing_state}}</td>
+    </tr>
+
+    <tr>
+    <th>Country </th>
+    <td class="td_print">{{$crs_details->mailing_country}}</td>
+    </tr>
+
+    <tr>
+    <th>Postal Code / Zip Code </th>
+    <td class="td_print">{{$crs_details->mailing_zipcode}}</td>
+    </tr>
+
+    <tr>
+    <th>PO Box </th>
+    <td class="td_print">{{$crs_details->mailing_pobox}}</td>
+    </tr>
+
+    <tr>
+    <th>Date of Birth </th>
+    <td class="td_print">{{$crs_details->mailing_dob}}</td>
+    </tr>
+
+    <tr>
+    <th>Place of Birth </th>
+    <td class="td_print">{{$crs_details->mailing_pob}}</td>
+    </tr>
+   
+    <tr>
+    <th>Town or City of Birth </th>
+    <td class="td_print">{{$crs_details->mailing_tob}}</td>
+    </tr>
+    <tr>
+    <th>Country of Birth </th>
+    <td class="td_print">{{$crs_details->mailing_cob}}</td>
+    </tr>
+
+
+    <tr>
+      <th colspan="2"> <h4 style="margin-top: 15px;">Country of tax Residence & Taxpayer Identification Number (TIN) Details</h4> </th>
+      </tr>
+
+    <tr>
+    <th>Name of Country Residence</th>
+    <td class="td_print">{{$crs_details->mailing_tax_country}}</td>
+    </tr>
+            
+
+    <tr>
+    <th>Taxpayer Identification (TIN)</th>
+    <td class="td_print">{{$crs_details->isTaxPayer}}</td>
+    </tr>
+
+    <tr>
+    <th>Taxpayer Number</th>
+    <td class="td_print">{{$crs_details->TaxPayerNumber}}</td>
+    </tr>
+
+    <tr>
+    <th>Reason</th>
+    <td class="td_print">{{$crs_details->reason}}</td>
+    </tr>
+
+    <tr>
+    <th>Specific Reason</th>
+    <td class="td_print">{{$crs_details->specify_second_reason}}</td>
+    </tr>
 
 </tbody>
 </table>
+
+
+<table class="table">
+  <tbody>
+  
+  <br>
+  <h4 class="alert alert-success bank_detail">Bank Details</h4>
+  
+  <tr>
+  <th>Bank Name</th>
+  <td class="td_print">{{$bank_details->bank_name}}</td>
+  </tr>
+  
+  <tr>
+  <th>Branch Name</th>
+  <td class="td_print">{{$bank_details->branch_name}}</td>
+  </tr>
+  
+  <tr>
+  <th>Account Title</th>
+  <td class="td_print">{{$bank_details->account_title}}</td>
+  </tr>
+  
+  <tr>
+  <th>IBAN</th>
+  <td class="td_print">{{$bank_details->iban_number}}</td>
+  </tr>
+  
+  
+  </tbody>
+  </table>
 
 <table class="table">
 <tbody>

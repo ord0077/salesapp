@@ -84,6 +84,7 @@ The Fund Field has a duplicate value.
 <p class="name_msg" style="color:red;padding:5px;"></p>
 </div>
 
+
 <div class="form-group col-md-4">
 <label>Middle Name</label>
 <input id="middle_name"  name="middle_name" class="form-control pb" value="{{old('middle_name')}}" >

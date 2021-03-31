@@ -258,7 +258,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="cd[]" value="pob_country">
 </td>
 <th>Place Of Birth (Country)</th>
-<td>{{explode('|',$customer_details->pob_country)[1]}}</td>
+<td>{{$customer_details->pob_country}}</td>
 </tr>
 
 <tr>
@@ -266,7 +266,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="cd[]" value="pob_city">
 </td>
 <th>Place Of Birth (City)</th>
-<td>{{explode('|',$customer_details->pob_city)[1]}}</td>
+<td>{{$customer_details->pob_city}}</td>
 </tr>
 
 <tr>
@@ -431,7 +431,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="cd[]" value="country1">
 </td>
 <th>Mailing Country</th>
-<td>{{explode('|',$customer_details->country1)[1]}}</td>
+<td>{{$customer_details->country1}}</td>
 </tr>
 
 <tr>
@@ -439,7 +439,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="cd[]" value="city1">
 </td>
 <th>Mailing City</th>
-<td>{{explode('|',$customer_details->city1)[1]}}</td>
+<td>{{$customer_details->city1}}</td>
 </tr>
 
 <tr>
@@ -486,7 +486,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="bd[]" value="bank_name">
 </td>
 <th>Bank Name</th>
-<td class="td_print">{{explode('|',$bank_details->bank_name)[1]}}</td>
+<td class="td_print">{{$bank_details->bank_name}}</td>
 </tr>
 
 <tr>
@@ -494,7 +494,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="bd[]" value="branch_name">
 </td>
 <th>Branch Name</th>
-<td class="td_print">{{explode('|',$bank_details->branch_name)[1]}}</td>
+<td class="td_print">{{$bank_details->branch_name}}</td>
 </tr>
 
 <tr>
@@ -564,7 +564,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="checkbox" name="ids[]" value="bank_name">
 </td>
 <th>Bank Name</th>
-<td>{{explode('|',$investment_details->bank_name)[1]}}</td>
+<td>{{$investment_details->bank_name}}</td>
 </tr>
 
 

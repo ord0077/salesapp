@@ -1,4 +1,8 @@
+<?php //dd($crs_new);?>
+
 @extends('layouts.admin-app')
+
+
 
 @section('content')
 <!-- main content start-->
@@ -195,6 +199,201 @@ $ext = pathinfo($cdn[1], PATHINFO_EXTENSION);
 </table>
 
 
+@if($crs_new)
+<table class="table">
+<tbody>
+
+<br>
+<h4 class="alert alert-success">Common Reporting Standard (CRS) Details</h4>
+@foreach($crs_new as $crs)
+
+@if($crs[0] == 'crs_name_account_holder')
+<tr>
+<th>Name of Account Holder    </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+@elseif($crs[0] == 'crs_family_name')
+<tr>
+<th>Family Name of Surname(s)</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+@elseif($crs[0] == 'crs_given_name')
+<tr>
+<th>First or Given Name  </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_middle_name')
+<tr>
+<th>Middle Name(s) </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_current_address')
+<tr>
+<th>Current Residential Address </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_country_txt')
+<tr>
+<th>Country</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_city_txt')
+<tr>
+<th>Town/City/Province </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_state')
+<tr>
+<th>County/State </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+@elseif($crs[0] == 'crs_zipcode')
+<tr>
+<th>Postal Code / Zip Code </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'crs_pobox')
+<tr>
+<th>PO Box</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_address')
+<tr>
+<th>Mailing Address </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_city')
+<tr>
+<th>Town/City/Province </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_state')
+<tr>
+<th>County/State </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_country')
+<tr>
+<th>Country</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_zipcode')
+<tr>
+<th>Postal Code / Zip Code </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_pobox')
+<tr>
+<th>PO Box</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_dob')
+<tr>
+<th>Date of Birth </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_pob')
+<tr>
+<th>Place of Birth </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_tob')
+<tr>
+<th>Town or City of Birthx</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_cob')
+<tr>
+<th>Country of Birth </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'mailing_tax_country')
+<tr>
+<th>Name of Country Residence</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'isTaxPayer')
+<tr>
+<th>Taxpayer Identification </th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'TaxPayerNumber')
+<tr>
+<th>Taxpayer Number</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+@elseif($crs[0] == 'reason')
+<tr>
+<th>Reason</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+
+
+
+@elseif($crs[0] == 'specify_second_reason')
+<tr>
+<th>Specific Reason</th>
+<td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+</tr>
+
+@else
+<tr>
+    <th>{{$crs[0]}}</th>
+    <td><input class="form-control" type="text" name="crs[{{$crs[0]}}]" value="{{$crs[1]}}"></td>
+    </tr>
+@endif
+	
+
+	
+
+@endforeach
+
+</tbody>
+</table>
+@endif
 
 @if($bds_new)
 <table class="table">

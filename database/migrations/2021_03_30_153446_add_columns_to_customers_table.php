@@ -31,7 +31,7 @@ class AddColumnsToCustomersTable extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('underage');
-            $table->dropColumn('Guardian');
+            $table->dropColumn('guardian');
             $table->dropColumn('relation_with_minor');
             $table->dropColumn('cnic_nicop');
             $table->dropColumn('cnic_nicop_expiry');

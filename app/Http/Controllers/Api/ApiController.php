@@ -9,6 +9,9 @@ use App\Mail\Forms;
 use App\Mail\Welcome;
 use Validator;
 use App\Risk;
+use App\CRS;
+
+
 
 
 class ApiController extends Controller
@@ -130,6 +133,8 @@ class ApiController extends Controller
 	];
 	//dd($arr);
 
+	
+
 		$inserted = DB::table('customers')->insertGetId($arr);
 		
 
@@ -219,39 +224,47 @@ class ApiController extends Controller
 		return response()->json(200);
 		
 	}
+
+
 	public function save_crs(Request $req){
 		
 		$arr = [
 		"customer_id" => $req->customer_id,
-		"name_account_holder" => $req->name_account_holder,
-		"family_surname" => $req->family_surname, 
-		"given_name" => $req->given_name, 
-		"middle_name" => $req->middle_name,
-		"current_address" => $req->current_address,
-		"crs_city" => $req->crs_city,
-		"county_state" => $req->county_state,
-		"crs_country" => $req->crs_country,
-		"postal_code" => $req->postal_code,
-		"po_box" => $req->po_box, 
-		"mailing_adress" => $req->mailing_adress, 
-		"town_city" => $req->town_city,
-		"mailing_county_state" => $req->mailing_county_state,
-		"country" => $req->country,
-		"mailing_postal_code" => $req->mailing_postal_code,
-		"mailing_po_box" => $req->mailing_po_box,
+		"crs_name_account_holder" => $req->crs_name_account_holder,
+		"crs_family_name" => $req->crs_family_name, 
+		"crs_given_name" => $req->crs_given_name, 
+		"crs_middle_name" => $req->crs_middle_name,
+		"crs_current_address" => $req->crs_current_address,
+		"crs_country_id" => $req->crs_country_id,
+		"crs_country_txt" => $req->crs_country_txt,	
+		"crs_city_id" => $req->crs_city_id,
+		"crs_city_txt" => $req->crs_city_txt,
+		"crs_state" => $req->crs_state,
+		"crs_zipcode" => $req->crs_zipcode,
+		"crs_pobox" => $req->crs_pobox, 
+
+
+		"mailing_address" => $req->mailing_address, 
+		"mailing_city" => $req->mailing_city,
+		"mailing_state" => $req->mailing_state,
+		"mailing_country" => $req->mailing_country,
+		"mailing_zipcode" => $req->mailing_zipcode,
+		"mailing_pobox" => $req->mailing_pobox,
 		"mailing_dob" => $req->mailing_dob,
 		"mailing_pob" => $req->mailing_pob, 
 		"mailing_tob" => $req->mailing_tob, 
 		"mailing_cob" => $req->mailing_cob,
-		"tax_country_residence" => $req->cnic_nicop_expiry,
-		"taxpayer" => $req->taxpayer,
-		"taxpayer_number" => $req->taxpayer_number,
+		"mailing_tax_country" => $req->mailing_tax_country,
+
+		"isTaxPayer" => $req->isTaxPayer,
+		"TaxPayerNumber" => $req->TaxPayerNumber,
 		"reason" => $req->reason,
 		"specify_second_reason" => $req->specify_second_reason,
 		"created_at" => now(),
 		"updated_at" => now(),
 	];
 		$inserted = DB::table('c_r_s')->insert($arr);
+		return $inserted ? 1 : 0;
 		return response()->json(200);
 		
 	}
