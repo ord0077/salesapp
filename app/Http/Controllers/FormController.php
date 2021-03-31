@@ -84,6 +84,8 @@ $agent_code = \DB::table('users')->where('id',$form_data->user_id)->first()->age
 
 $customer_details = \DB::table('customers')->where('id',$customer_id)->first();
 
+$nominee_details = \DB::table('nominees')->where('customer_id',$customer_id)->get();
+
 $investment_details = 
 \DB::table('investment_details')->where('customer_id',$customer_id)->first();
 
@@ -101,6 +103,7 @@ return view('retails.single',[
     "agent_code" => $agent_code,
     'form_data' => $form_data,
     'customer_details' => $customer_details,
+    'nominee_details' => $nominee_details,
     'bank_details' => $bank_details,
     'investment_details' => $investment_details,
     'other_details' => $other_details,          
