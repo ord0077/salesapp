@@ -337,8 +337,6 @@ else{
 
 public function push_to_crm(Request $request){
 
-$sales_person_id = session('sales-Agent-Id');
-$agent_code = $request->agent_code;
 $form_data = json_decode($request->form_data);
 $customer_details = json_decode($request->customer_details);
 $bank_details = json_decode($request->bank_details);
@@ -400,8 +398,8 @@ $arr = array (
   'CNICAttachment' => $cnic_attachment,
   'ZakatAttachment' => $zakat_certificate,
   'WFormAttachment' => $wf_attachment,
-  'Sales_Person_Code' => $agent_code,
-  'Sales_Person_ID' => $sales_person_id,
+  'Sales_Person_Code' => $request->agent_code,
+  'Sales_Person_ID' => $request->agent_code,
   'Channel' => $form_data->channel,
   'AcTitle' => $customer_details->name,
   'FatherName' => $customer_details->father_name,
