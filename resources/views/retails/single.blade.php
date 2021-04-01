@@ -14,7 +14,9 @@ border:2px solid #555;
 input[type='checkbox']:checked {
 background: #abd;
 }
-
+.title-logo{
+  display:block;
+}
 @media print
 {
 input[type='checkbox']{display: none;}
@@ -24,7 +26,10 @@ input[type='checkbox']{display: none;}
 button.printbtn{display: none!important;}
 
 .btnsiscussion{display: none!important;}
-
+.title-logo{
+  display:block;
+  margin-bottom:10px;
+}
 .form-title
 {
 /*display: none!important;*/
@@ -35,7 +40,7 @@ border: none!important;
 .form-title h4
 {
 font-weight: 700;
-font-size: 24px!important;
+font-size: 20px!important;
 margin-left: -12px!important;
 }
 
@@ -136,9 +141,10 @@ td.td_print_action{padding-left: 130px!important;}
 
 <br>
 
-
-
 <div class="form-title">
+<h4 class="title-logo">Digital Account Opening Form (For Individuals Only)
+  <img src="{{url('uploads/logo.png')}}" style="float:right;margin-top:-5px;" />
+</h4>
 
 <h4 style="color:white;">Form Id # {{$form_id}}
   <button type="button" class="btn btn-success btnsiscussion" style="float:right;margin-top:-5px;" data-toggle="modal" data-target="#myModal">Discussion</button>
@@ -1045,6 +1051,30 @@ td.td_print_action{padding-left: 130px!important;}
 </tbody>
 </table>
 
+
+
+
+<table class="table title-logo">
+<h4 class="alert alert-success title-logo">Declaration</h4>
+<tbody>
+<tr>  
+<th>Name</th>
+<td class="td_print_action"></td>
+</tr>
+<tr>  
+<th>Signature</th>
+<td class="td_print_action"></td>
+</tr>
+<tr>  
+<th>Date</th>
+<td class="td_print_action"></td>
+</tr>
+<tr>  
+<th></th>
+<td class="td_print_action"></td>
+</tr>
+</tbody>
+</table>
 <!-- Modal -->
 
 
