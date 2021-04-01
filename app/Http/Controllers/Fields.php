@@ -295,6 +295,13 @@ public function update(Request $request, $id)
       }
      }
   }
+
+  if($request['crs']){    
+    foreach ($request['crs'] as $key => $value) {
+     $cd_success = DB::table('c_r_s')->where('id',$customer_id)->update([$key => $value]);
+    }
+  }
+
   if($request['bd']){    
     foreach ($request['bd'] as $key => $value) {
      $bd_success = DB::table('bank_details')->where('customer_id',$customer_id)->update([$key => $value]);
