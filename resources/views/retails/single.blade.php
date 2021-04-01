@@ -111,6 +111,7 @@ td.td_print_action{padding-left: 130px!important;}
 <input type="hidden" name="investment_details" value="{{json_encode($investment_details)}}">
 <input type="hidden" name="fatca_details" value="{{json_encode($fatca_details)}}">
 <input type="hidden" name="other_details" value="{{json_encode($other_details)}}">
+<input type="hidden" name="agent_code" value="{{$agent_code}}">
 <button type="submit" class="btn btn-success printbtn" style="">Push to CRM</button>
 <br>
 </form>
@@ -1030,6 +1031,11 @@ td.td_print_action{padding-left: 130px!important;}
 <th>Sales Agent</th>
 <td class="td_print_action"><strong>{{$user_name}}</strong></td>
 </tr>
+
+<tr>  
+  <th>Agent Code</th>
+  <td class="td_print_action"><strong>{{$agent_code}}</strong></td>
+  </tr>
 
 <tr>  
 <th>Channel</th>
