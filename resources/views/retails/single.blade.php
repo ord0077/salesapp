@@ -15,7 +15,7 @@ input[type='checkbox']:checked {
 background: #abd;
 }
 .title-logo{
-  display:block;
+  display:none;
 }
 @media print
 {
