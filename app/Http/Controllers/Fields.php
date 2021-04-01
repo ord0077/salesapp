@@ -296,9 +296,11 @@ public function update(Request $request, $id)
      }
   }
 
+  // dd($request['crs']);
+
   if($request['crs']){    
     foreach ($request['crs'] as $key => $value) {
-     $cd_success = DB::table('c_r_s')->where('id',$customer_id)->update([$key => $value]);
+     $crs_success = DB::table('c_r_s')->where('customer_id',$customer_id)->update([$key => $value]);
     }
   }
 
@@ -338,6 +340,7 @@ if(isset($zc_success)
 || isset($soi_attachment_success)
 || isset($wf_success)
 || isset($cd_success)
+|| isset($crs_success)
 || isset($nd_success) 
 || isset($bd_success)
 || isset($ids_success)
@@ -394,26 +397,26 @@ if(isset($zc_success)
 	  
 	 $recipients = \DB::table('users')->select('email')->where('role_id',3)->get();
 	 	
-	 	 foreach ($recipients as $recipient) {
-	 		$send = Mail::to($recipient)->send(new Correction_Response());
-	 		if (empty($send)) {
-		          \DB::table('email_activities')->insert([
-		          'status' => 'success',
-		          'msg' => 'mail has been sent successfully',
-		          'action' => 'Field update',
-		          'created_at' => now()
-		          ]);
-		          }
-		          else {          
+	 	//  foreach ($recipients as $recipient) {
+	 	// 	$send = Mail::to($recipient)->send(new Correction_Response());
+	 	// 	if (empty($send)) {
+		//           \DB::table('email_activities')->insert([
+		//           'status' => 'success',
+		//           'msg' => 'mail has been sent successfully',
+		//           'action' => 'Field update',
+		//           'created_at' => now()
+		//           ]);
+		//           }
+		//           else {          
 	
-		          \DB::table('email_activities')->insert([
-		          'status' => 'fail',
-		          'msg' => 'mail not sent',
-		           'action' => 'Field update',
-		          'created_at' => now()
-		          ]);	           
-		          }
-	 	}
+		//           \DB::table('email_activities')->insert([
+		//           'status' => 'fail',
+		//           'msg' => 'mail not sent',
+		//            'action' => 'Field update',
+		//           'created_at' => now()
+		//           ]);	           
+		//           }
+	 	// }
      
          return back()->with('msg','Field has been updated');    
 		
