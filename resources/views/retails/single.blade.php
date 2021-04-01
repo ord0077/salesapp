@@ -1,110 +1,8 @@
 @extends('layouts.retail-app')
 
 @section('content')
-<!-- main content start-->
-<style type="text/css">
-input[type='checkbox'] {
--webkit-appearance:none;
-width:30px;
-height:30px;
-background:white;
-border-radius:5px;
-border:2px solid #555;
-}
-input[type='checkbox']:checked {
-background: #abd;
-}
-.title-logo{
-  display:none;
-}
-@media print
-{
-input[type='checkbox']{display: none;}
 
-.dropdown-toggle {display:none!important;}
 
-button.printbtn{display: none!important;}
-
-.btnsiscussion{display: none!important;}
-.title-logo{
-  display:block;
-  margin-bottom:10px;
-}
-.form-title
-{
-/*display: none!important;*/
-margin-top: -200px;
-border: none!important;
-}
-
-.form-title h4
-{
-font-weight: 700;
-font-size: 20px!important;
-margin-left: -12px!important;
-}
-
-.addspecial{display: none!important;}
-
-.to_cbc{display: none!important;}
-
-.bckchanges{display: none!important;}
-
-.textblock{display: none!important;}
-
-.header-section{display:none!important;}
-
-.c_details
-{
-  margin-top: -80px!important; 
-  background-color:#9c9e9b!important;
-}
-
-.bank_detail{margin-top: -30px!important;}
-
-.fatca_detail{margin-top:-30px!important;}
-
-.action{margin-top:-30px!important;}
-
-.tables {margin-top:20px!important;}
-
-.tables h4
-{
-color: #000000!important;
-font-weight:600!important;
-border: solid #000!important;
-}
-
-.alert{padding: 5px!important;}
-
-img{width: 75px!important; height: 75px!important;}
-
-.footer
-{margin-top:40px!important;
-display:none!important;
-}
-
-.tables .table > thead > tr > th, .tables .table > tbody > tr > th, .tables .table > tfoot > tr > th, .tables .table > thead > tr > td, .tables .table > tbody > tr > td, .tables .table > tfoot > tr > td 
-{
-    border-top: 1px solid #150000!important;
-    line-height: 01;
-}
-
-.inv_details{margin-top:-30px!important;}
-
-table.table tr td:nth-child(1) {
-    display: none;
-}
-
-td.td_print{padding-left: 145px!important;}
-
-td.td_print_fatca{padding-right: 200px!important;}
-
-td.td_print_action{padding-left: 130px!important;}
-
-}
-
-</style>
 <div id="page-wrapper">
 
 <form method="post" action="{{url('ptc')}}">
@@ -143,8 +41,16 @@ td.td_print_action{padding-left: 130px!important;}
 <br>
 
 <div class="form-title">
+
+
+
+
 <h4 class="title-logo">Digital Account Opening Form (For Individuals Only)
-  <img src="{{url('uploads/logo.png')}}" style="float:right;margin-top:-5px;" />
+  {{-- <img style="margin-left:150px;" src="{{url('uploads/Logo Green.bmp')}}" /> --}}
+  
+
+  <img class="testimg" style="margin-left:150px;" src="{{url('images/logo.png')}}" />
+
 </h4>
 
 <h4 style="color:white;">Form Id # {{$form_id}}
@@ -635,14 +541,14 @@ td.td_print_action{padding-left: 130px!important;}
     <tr>
       <td><input type="checkbox" name="crs[]" value="crs_given_name"></td>
 
-    <th>First or Given Name (Text Box) </th>
+    <th>First or Given Name </th>
     <td class="td_print">{{$crs_details->crs_given_name}}</td>
     </tr>
     
     <tr>
       <td><input type="checkbox" name="crs[]" value="crs_middle_name"></td>
 
-    <th>Middle Name(s) (Text Box) </th>
+    <th>Middle Name(s) </th>
     <td class="td_print">{{$crs_details->crs_middle_name}}</td>
     </tr>
     
@@ -1058,29 +964,48 @@ td.td_print_action{padding-left: 130px!important;}
 </table>
 
 
-
-
-<table class="table title-logo">
+<div class="title-logo">
 <h4 class="alert alert-success title-logo">Declaration</h4>
-<tbody>
-<tr>  
-<th>Name</th>
-<td class="td_print_action"></td>
-</tr>
-<tr>  
-<th>Signature</th>
-<td class="td_print_action"></td>
-</tr>
-<tr>  
-<th>Date</th>
-<td class="td_print_action"></td>
-</tr>
-<tr>  
-<th></th>
-<td class="td_print_action"></td>
-</tr>
-</tbody>
-</table>
+
+<div>
+I/We hereby confirm that all information provided in this form is correct to the best of my/our knowledge and the documents submitted along with this application are genuine. I /We also confirm having read and understood the Trust Deeds and Offering Documents that govern the transactions and in particular the risks disclosures. I/We confirm that I/we have understood the details of Sales Load to be deducted including taxes thereon as well as the advice given in the Risk Profile section.
+</div>
+<br> 
+
+<div>
+I/We hereby permit HBL AMC, subject to applicable local laws, to share my/our information with domestic or overseas regulators or tax authorities where necessary to establish my/our tax liability in any jurisdiction. Where required by domestic or overseas regulators or tax authorities, I/we further agree that HBL AMC may withhold from my/our account(s) such amount as may be required according to applicable laws, regulation and directives. I/We will indemnify and hold harmless HBL AMC from any loss, action, cost, expense (including, but not limited to sums paid in settlement of claims, reasonable attorneys’ and consultant fees, and expert fees), claim, damages, or liability which arises or is incurred by HBL AMC in discharging its obligations under FATCA/CRS as a result of disclosures to external tax authorities.
+</div>
+<br>
+
+<div>
+I/We undertake to notify HBL AMC within 30 calendar days if there is a change in any information which I/we have provided to HBL AMC. I/We understand and accept that HBL AMC reserves the right to close or suspend my/our account, without prior notice, if required document/information is not submitted within a stipulated time.
+</div>
+<br>
+
+<div>
+I/We, the undersigned, would like to purchase the units of the investment scheme as per the details mentioned above. I/We, hereby indemnify that the decision to make investment in Low/Medium/High Risk Funds has solely undertaken at my/our own discretion, and none of the employee or representative of HBL AMC has convinced/forced to undertake the aforesaid investment. I/We have read and understood the relevant Trust Deeds, Offering Documents (including any supplemental documents), Risk profile table* and understand the associated risks. I/We have understood that past performance is not necessarily indicative and its officer, representative and employee of future results and HBL AMC does not provide any guaranteed return or assurance of minimum profit/return. Except where expressly stated in offering document, HBL AMC does not promise capital protection in any fund/plan. I/We fully understand that gain/loss on investment is completely dependent on market fluctuation/movement of price/yield of underlying instruments. I/We/ am/are entirely responsible and able to bear loss (if any) incurred as a result of above investment decision. I/We agree that HBL AMC is does not liable to compensate in the event of loss or dilution in actual investment. I/We have also received and reviewed Fund Manager Report and/or basic fund information as applicable in respect of related investment scheme(s). I/We understand that I/We can take refund of my/our first investment (cooling-off right for individuals only) within six working days in any collective investment scheme (CIS) managed by HBL AMC on applicable NAV along with charged Front-end Load (after deduction of any Back-end Load or Contingent Load), if I/We send a written request within three (3) business days from Account Statement issuance date. I/We confirm that I/We have understood the details of Sales Load to be deducted including taxes, as % of NAV. I/We confirm that in case of investment in riskier fund, risk profile of the account to be assumed accordingly.
+</div>
+<br>
+
+<div>
+I/we notify the advisor of any changes in my/our information, risk tolerance goals or investments. I/We further declare that my/our financial needs may change over time and I/we shall be solely responsible for all my/our current and future investment, conversion and transfer transactions if these transactions are not in accordance with my/our abovementioned risk profiling results.
+</div>
+<br>
+
+
+<div class="td_print_action">Name</div>
+<div class="td_print_action" style="border:1px solid; height:75px;" ></div>
+
+
+<div class="td_print_action">Signature</div>
+<div class="td_print_action" style="border:1px solid; height:75px;" ></div>
+
+<div class="td_print_action">Date</div>
+<div class="td_print_action" style="border:1px solid; height:75px;" ></div>
+</div>
+
+
+
 <!-- Modal -->
 
 
@@ -1231,4 +1156,119 @@ $("#soi_attachment").on("click", function() {
 
 
 </script>
+
+<!-- main content start-->
+<style type="text/css">
+  input[type='checkbox'] {
+  -webkit-appearance:none;
+  width:30px;
+  height:30px;
+  background:white;
+  border-radius:5px;
+  border:2px solid #555;
+  }
+  input[type='checkbox']:checked {
+  background: #abd;
+  }
+  .title-logo{
+    display:none;
+  }
+  @media print
+  {
+.testimg
+{
+ 
+  width: 220px!important;
+  float: right;
+  margin-top:-25px;
+  height: 30px!important;
+}
+
+  input[type='checkbox']{display: none;}
+  
+  .dropdown-toggle {display:none!important;}
+  
+  button.printbtn{display: none!important;}
+  
+  .btnsiscussion{display: none!important;}
+  .title-logo{
+    display:block;
+    margin-bottom:10px;
+  }
+  .form-title
+  {
+  /*display: none!important;*/
+  margin-top: -200px;
+  border: none!important;
+  }
+  
+  .form-title h4
+  {
+  font-weight: 700;
+  font-size: 20px!important;
+  margin-left: -12px!important;
+  }
+  
+  .addspecial{display: none!important;}
+  
+  .to_cbc{display: none!important;}
+  
+  .bckchanges{display: none!important;}
+  
+  .textblock{display: none!important;}
+  
+  .header-section{display:none!important;}
+  
+  .c_details
+  {
+    margin-top: -80px!important; 
+    background-color:#9c9e9b!important;
+  }
+  
+  .bank_detail{margin-top: -30px!important;}
+  
+  .fatca_detail{margin-top:-30px!important;}
+  
+  .action{margin-top:-30px!important;}
+  
+  .tables {margin-top:20px!important;}
+  
+  .tables h4
+  {
+  color: #000000!important;
+  font-weight:600!important;
+  border: solid #000!important;
+  }
+  
+  .alert{padding: 5px!important;}
+  
+  img{width: 75px!important; height: 75px!important;}
+  
+  .footer
+  {margin-top:40px!important;
+  display:none!important;
+  }
+  
+  .tables .table > thead > tr > th, .tables .table > tbody > tr > th, .tables .table > tfoot > tr > th, .tables .table > thead > tr > td, .tables .table > tbody > tr > td, .tables .table > tfoot > tr > td 
+  {
+      border-top: 1px solid #150000!important;
+      line-height: 01;
+  }
+  
+  .inv_details{margin-top:-30px!important;}
+  
+  table.table tr td:nth-child(1) {
+      display: none;
+  }
+  
+  td.td_print{padding-left: 145px!important;}
+  
+  td.td_print_fatca{padding-right: 200px!important;}
+  
+  td.td_print_action{padding-left: 130px!important;}
+  
+  }
+  
+  </style>
+  
 @endsection
