@@ -399,7 +399,9 @@ $arr = array (
   'ZakatAttachment' => $zakat_certificate,
   'WFormAttachment' => $wf_attachment,
   'Sales_Person_Code' => $request->agent_code,
-  'Sales_Person_ID' => $request->agent_code,
+  // 'Sales_Person_ID' => $request->agent_code,
+
+  'PortalUserEmail'=>$request->email="inayat.hussain@hblasset.com",
   'Channel' => $form_data->channel,
   'AcTitle' => $customer_details->name,
   'FatherName' => $customer_details->father_name,
@@ -522,7 +524,7 @@ $arr = array (
 );  
 
 
-//echo json_encode($arr,JSON_UNESCAPED_SLASHES);
+// echo json_encode($arr,JSON_UNESCAPED_SLASHES);
 // echo '<pre>';
 // print_r($arr);
 // die;
@@ -601,6 +603,7 @@ $arr = [
   'form_id' => $id,
   "user_name" => $user->name,
   "agent_code" => $user->agent_code,
+  "email" => $user->email,
   'form_data' => $fd,
   'customer_details' => $this->ddf('customers','id',$fd->customer_id),
   'bank_details' => $this->ddf('bank_details','customer_id',$fd->customer_id),
@@ -611,6 +614,8 @@ $arr = [
   'nominee_details' => $this->dda('nominees','customer_id',$fd->customer_id),
   'msgs' => $this->dda('discussions','form_id',$id)
 ];
+
+
 
 return view($view,$arr);
   
